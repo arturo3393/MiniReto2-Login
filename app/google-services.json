@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "459527470796",
+    "project_id": "mini-reto-2",
+    "storage_bucket": "mini-reto-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459527470796:android:d11e161eadbff05f268c69",
+        "android_client_info": {
+          "package_name": "com.example.minireto2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459527470796-iueuc94nrlhlmk7j1k9fqg1bg2fq9lhb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6xwcPg0sSKIbGucFheWG84_kCWxS-5oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459527470796-iueuc94nrlhlmk7j1k9fqg1bg2fq9lhb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
