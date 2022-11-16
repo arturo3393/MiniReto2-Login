@@ -1,10 +1,13 @@
 package com.example.minireto2
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -33,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         lateinit var auth: FirebaseAuth
-// ...
+
 // Initialize Firebase Auth
         auth = Firebase.auth
 
@@ -94,12 +97,27 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-        showMessage("Take photo")
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMARA_REQUEST_CODE)
     }
 
     fun showMessage(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            CAMARA_REQUEST_CODE ->{
+                if(resultCode != Activity.RESULT_OK){
+                    showMessage("Photo was not taken")
+                }
+                else{
+                    val bitmap = data?.extras?.get("data") as Bitmap
+                    binding.ivProfile.setImageBitmap(bitmap)
+                }
+            }
+        }
+    }
 
 }
