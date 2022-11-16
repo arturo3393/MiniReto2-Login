@@ -21,6 +21,7 @@ import org.w3c.dom.Text
 import java.util.jar.Manifest
 
 class ProfileActivity : AppCompatActivity() {
+    private val IMAGE_REQUEST_CODE :Int = 102
     private val CAMARA_REQUEST_CODE: Int = 101
     private val PERMISSION_CAMARA : Int = 100
     lateinit var binding: ActivityProfileBinding
@@ -35,6 +36,10 @@ class ProfileActivity : AppCompatActivity() {
             askPermissions()
         }
 
+        binding.btnGallery.setOnClickListener {
+            pickImageGallery()
+        }
+
         lateinit var auth: FirebaseAuth
 
 // Initialize Firebase Auth
@@ -45,6 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         val email = bundle?.getString("Email")
         setup(email ?: "")
     }
+
 
 
 
@@ -105,6 +111,13 @@ class ProfileActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
+    private fun pickImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type="image/*"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
@@ -117,7 +130,19 @@ class ProfileActivity : AppCompatActivity() {
                     binding.ivProfile.setImageBitmap(bitmap)
                 }
             }
+            IMAGE_REQUEST_CODE ->{
+                if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
+                    binding.ivProfile.setImageURI(data?.data)
+                }
+            }
         }
     }
 
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
+            binding.ivProfile.setImageURI(data?.data)
+        }
+    }*/
 }
